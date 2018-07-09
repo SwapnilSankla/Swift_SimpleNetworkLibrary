@@ -9,8 +9,8 @@ public class NetworkLayer {
     }
 
     public func get<T: Decodable>(url: URL,
-                           successHandler: @escaping (T) -> Void,
-                           errorHandler: @escaping (String) -> Void) {
+                                  successHandler: @escaping (T) -> Void,
+                                  errorHandler: @escaping (String) -> Void) {
 
         let completionHandler: NetworkCompletionHandler = { (data, urlResponse, error) in
             if let error = error {
