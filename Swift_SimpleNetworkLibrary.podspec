@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-A simple and lightweight network library.
+A simple and lightweight network library. The intent is also demonstrate how easy it is to build a network layer based on URLSession. Mostly on projects we use libraries like Alamofire but never explore how things actually work under the hood.
                        DESC
 
   s.homepage         = 'https://github.com/SwapnilSankla/Swift_SimpleNetworkLibrary'
@@ -30,6 +30,7 @@ A simple and lightweight network library.
   s.ios.deployment_target = '10.0'
 
   s.source_files = 'Swift_SimpleNetworkLibrary/Classes/**/*'
+  s.swift_version = '3.2'
   
   # s.resource_bundles = {
   #   'Swift_SimpleNetworkLibrary' => ['Swift_SimpleNetworkLibrary/Assets/*.png']
