@@ -2,10 +2,13 @@ import UIKit
 import Swift_SimpleNetworkLibrary
 
 class ViewController: UIViewController {
-
     override func viewDidLoad() {
         super.viewDidLoad()
+        getExample()
+        postExample()
+    }
 
+    private func getExample() {
         let successHandler: ([Employee]) -> Void = { (employees) in
             print(employees)
         }
@@ -13,16 +16,19 @@ class ViewController: UIViewController {
             print(error)
         }
 
-        if let url = URL(string: "http://dummy.restapiexample.com/api/v1/employees") {
-            NetworkLayer().get(url: url,
-                               successHandler: successHandler,
-                               errorHandler: errorHandler)
-        }
+        NetworkLayer().get(urlString: "http://dummy.restapiexample.com/api/v1/employees",
+                           successHandler: successHandler,
+                           errorHandler: errorHandler)
+    }
 
-        let emp1 = Employee(name: "Test_123", salary: "12234", age: "22")
-        if let url = URL(string: "http://dummy.restapiexample.com/api/v1/create") {
-            NetworkLayer().post(url: url, body: emp1)
+    private func postExample() {
+        let errorHandler: (String) -> Void = { (error) in
+            print(error)
         }
+        let emp1 = Employee(name: "Test_123", salary: "12234", age: "22")
+        NetworkLayer().post(urlString: "http://dummy.restapiexample.com/api/v1/create",
+                            body: emp1,
+                            errorHandler: errorHandler)
     }
 }
 
