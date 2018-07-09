@@ -20,6 +20,33 @@ it, simply add the following line to your Podfile:
 pod 'Swift_SimpleNetworkLibrary'
 ```
 
+## GET Request
+Let's try to use a cool REST API http://dummy.restapiexample.com/api/v1/employees. This API provides us a dummy set of employees. The employee looks something like below.
+``` swift
+struct Employee: Codable {
+    let employee_name: String
+    let employee_salary: String
+    let employee_age: String
+}
+```
+Now to fetch employee details from the API, we just need to call get method on NetworkLayer.
+
+```swift
+let successHandler: ([Employee]) -> Void = { (employees) in
+  print(employees)
+}
+
+let errorHandler: (String) -> Void = { (error) in
+  print(error)
+}
+
+if let url = URL(string: "http://dummy.restapiexample.com/api/v1/employees") {
+  NetworkLayer().get(url: url, successHandler: successHandler, errorHandler: errorHandler)
+}
+```
+The coolest part is the Codable protocol which makes the network layer generic. Also check that Swift's strong type inference incredibly helps us as while calling get method, we don't specify the type in which we are expecting a response. Cool isn't it?
+
+
 ## Author
 
 Swapnil Sankla, swapnil.sankla@gmail.com
