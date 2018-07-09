@@ -18,17 +18,23 @@ class ViewController: UIViewController {
                                successHandler: successHandler,
                                errorHandler: errorHandler)
         }
-    }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        let emp1 = Employee(name: "Test_123", salary: "12234", age: "22")
+        if let url = URL(string: "http://dummy.restapiexample.com/api/v1/create") {
+            NetworkLayer().post(urlRequest: URLRequest(url: url), body: emp1)
+        }
     }
 }
 
 struct Employee: Codable {
-    let employee_name: String
-    let employee_salary: String
-    let employee_age: String
+    let name: String
+    let salary: String
+    let age: String
+
+    enum CodingKeys: String, CodingKey {
+        case name = "employee_name"
+        case salary = "employee_salary"
+        case age = "employee_age"
+    }
 }
 

@@ -25,7 +25,7 @@ A simple and lightweight network library. The intent is also demonstrate how eas
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'Swapnil Sankla' => 'swapnil.sankla@gmail.com' }
   s.source           = { :git => 'https://github.com/SwapnilSankla/Swift_SimpleNetworkLibrary.git', :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/swapnil_sankla'
+  s.social_media_url = 'https://twitter.com/swapnil_sankla'
 
   s.ios.deployment_target = '10.0'
 
