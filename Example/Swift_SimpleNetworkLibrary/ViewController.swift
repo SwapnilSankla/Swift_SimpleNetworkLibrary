@@ -21,7 +21,7 @@ class ViewController: UIViewController {
 
         let emp1 = Employee(name: "Test_123", salary: "12234", age: "22")
         if let url = URL(string: "http://dummy.restapiexample.com/api/v1/create") {
-            NetworkLayer().post(urlRequest: URLRequest(url: url), body: emp1)
+            NetworkLayer().post(url: url, body: emp1)
         }
     }
 }

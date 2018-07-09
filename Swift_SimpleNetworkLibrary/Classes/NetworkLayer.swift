@@ -39,7 +39,7 @@ public class NetworkLayer {
         URLSession.shared.dataTask(with: url, completionHandler: completionHandler).resume()
     }
 
-    public func post<T: Encodable>(urlRequest: URLRequest,
+    public func post<T: Encodable>(url: URL,
                                    body: T,
                                    errorHandler: ErrorHandler? = nil) {
 
@@ -58,7 +58,7 @@ public class NetworkLayer {
             }
         }
 
-        var request = urlRequest
+        var request = URLRequest(url: url)
         request.timeoutInterval = 90
         request.httpMethod = "POST"
         request.allHTTPHeaderFields = ["Content-Type":"application/json"]
