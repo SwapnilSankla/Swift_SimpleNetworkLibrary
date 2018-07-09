@@ -40,9 +40,10 @@ let errorHandler: (String) -> Void = { (error) in
   print(error)
 }
 
-if let url = URL(string: "http://dummy.restapiexample.com/api/v1/employees") {
-  NetworkLayer().get(url: url, successHandler: successHandler, errorHandler: errorHandler)
-}
+NetworkLayer().get(urlString: "http://dummy.restapiexample.com/api/v1/employees",
+                   headers: ["key": "value"],
+                   successHandler: successHandler,
+                   errorHandler: errorHandler)
 ```
 The coolest part is the Codable protocol which makes the network layer generic. Also check that Swift's strong type inference incredibly helps us as while calling get method, we don't specify the type in which we are expecting a response. Cool isn't it?
 
@@ -50,11 +51,11 @@ The coolest part is the Codable protocol which makes the network layer generic. 
 POST is equally simple!
 ```swift
 let emp1 = Employee(name: "Test_123", salary: "12234", age: "22")
-if let url = URL(string: "http://dummy.restapiexample.com/api/v1/create") {
-  NetworkLayer().post(url: url, body: emp1)
-}
+NetworkLayer().post(urlString: "http://dummy.restapiexample.com/api/v1/create",
+                    headers: ["key": "value"],
+                    body: emp1,
+                    errorHandler: errorHandler)
 ```
-Post method also accepts optional error handler.
 
 ## Author
 
