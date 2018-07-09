@@ -46,6 +46,15 @@ if let url = URL(string: "http://dummy.restapiexample.com/api/v1/employees") {
 ```
 The coolest part is the Codable protocol which makes the network layer generic. Also check that Swift's strong type inference incredibly helps us as while calling get method, we don't specify the type in which we are expecting a response. Cool isn't it?
 
+## POST Request
+POST is equally simple!
+```swift
+let emp1 = Employee(name: "Test_123", salary: "12234", age: "22")
+if let url = URL(string: "http://dummy.restapiexample.com/api/v1/create") {
+  NetworkLayer().post(url: url, body: emp1)
+}
+```
+Post method also accepts optional error handler.
 
 ## Author
 
