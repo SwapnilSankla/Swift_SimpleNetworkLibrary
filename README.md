@@ -1,9 +1,6 @@
 # Swift_SimpleNetworkLibrary
 
-[![CI Status](https://img.shields.io/travis/SwapnilSankla/Swift_SimpleNetworkLibrary.svg?style=flat)](https://travis-ci.org/SwapnilSankla/Swift_SimpleNetworkLibrary)
-[![Version](https://img.shields.io/cocoapods/v/Swift_SimpleNetworkLibrary.svg?style=flat)](https://cocoapods.org/pods/Swift_SimpleNetworkLibrary)
-[![License](https://img.shields.io/cocoapods/l/Swift_SimpleNetworkLibrary.svg?style=flat)](https://cocoapods.org/pods/Swift_SimpleNetworkLibrary)
-[![Platform](https://img.shields.io/cocoapods/p/Swift_SimpleNetworkLibrary.svg?style=flat)](https://cocoapods.org/pods/Swift_SimpleNetworkLibrary)
+[![CI Status](https://travis-ci.org/SwapnilSankla/Swift_SimpleNetworkLibrary.svg?branch=master)](https://travis-ci.org/SwapnilSankla/Swift_SimpleNetworkLibrary)
 
 ## Example
 
