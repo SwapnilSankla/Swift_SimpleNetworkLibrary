@@ -21,28 +21,25 @@ public class NetworkLayer {
                 return
             }
 
-            if let unwrappedUrlResponse = urlResponse as? HTTPURLResponse {
-                if self.isSuccessCode(unwrappedUrlResponse.statusCode) {
-                    if let data = data {
-                        if let responseObject = try? JSONDecoder().decode(T.self, from: data) {
-                            successHandler(responseObject)
-                            return
-                        } else {
-                            print("Unable to parse the response in given type \(T.self)")
-                        }
-                    }
+            if self.isSuccessCode(urlResponse) {
+                guard let data = data else {
+                    print("Unable to parse the response in given type \(T.self)")
+                    return errorHandler(NetworkLayer.genericError)
+                }
+                if let responseObject = try? JSONDecoder().decode(T.self, from: data) {
+                    successHandler(responseObject)
+                    return
                 }
             }
-
             errorHandler(NetworkLayer.genericError)
         }
-        if let url = URL(string: urlString) {
-            var request = URLRequest(url: url)
-            request.allHTTPHeaderFields = headers
-            URLSession.shared.dataTask(with: request, completionHandler: completionHandler).resume()
-        } else {
-            errorHandler("Unable to create URL from given string")
+
+        guard let url = URL(string: urlString) else {
+            return errorHandler("Unable to create URL from given string")
         }
+        var request = URLRequest(url: url)
+        request.allHTTPHeaderFields = headers
+        URLSession.shared.dataTask(with: request, completionHandler: completionHandler).resume()
     }
 
     public func post<T: Encodable>(urlString: String,
@@ -57,37 +54,39 @@ public class NetworkLayer {
                 return
             }
 
-            if let unwrappedUrlResponse = urlResponse as? HTTPURLResponse {
-                if !self.isSuccessCode(unwrappedUrlResponse.statusCode) {
-                    errorHandler(NetworkLayer.genericError)
-                    return
-                }
+            if !self.isSuccessCode(urlResponse) {
+                errorHandler(NetworkLayer.genericError)
+                return
             }
         }
 
-        if let url = URL(string: urlString) {
-            var request = URLRequest(url: url)
-            request.timeoutInterval = 90
-            request.allHTTPHeaderFields = headers
-            request.httpMethod = "POST"
-            request.allHTTPHeaderFields = ["Content-Type":"application/json"]
-            if let data = try? JSONEncoder().encode(body) {
-                request.httpBody = data
-                URLSession
-                    .shared
-                    .uploadTask(with: request,
-                                from: data,
-                                completionHandler: completionHandler)
-                    .resume()
-            } else {
-                errorHandler("Cannot encode given object into Data")
-            }
-        } else {
-            errorHandler("Unable to create URL from given string")
+        guard let url = URL(string: urlString) else {
+            return errorHandler("Unable to create URL from given string")
         }
+        var request = URLRequest(url: url)
+        request.timeoutInterval = 90
+        request.allHTTPHeaderFields = headers
+        request.httpMethod = "POST"
+        request.allHTTPHeaderFields = ["Content-Type":"application/json"]
+        guard let data = try? JSONEncoder().encode(body) else {
+            return errorHandler("Cannot encode given object into Data")
+        }
+        request.httpBody = data
+        URLSession.shared
+            .uploadTask(with: request,
+                        from: data,
+                        completionHandler: completionHandler)
+            .resume()
     }
 
     private func isSuccessCode(_ statusCode: Int) -> Bool {
         return statusCode >= 200 && statusCode < 300
+    }
+
+    private func isSuccessCode(_ response: URLResponse?) -> Bool {
+        guard let urlResponse = response as? HTTPURLResponse else {
+            return false
+        }
+        return isSuccessCode(urlResponse.statusCode)
     }
 }
