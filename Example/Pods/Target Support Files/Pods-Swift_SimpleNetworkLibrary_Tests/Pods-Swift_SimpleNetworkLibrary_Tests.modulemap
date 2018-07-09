@@ -1,0 +1,6 @@
+framework module Pods_Swift_SimpleNetworkLibrary_Tests {
+  umbrella header "Pods-Swift_SimpleNetworkLibrary_Tests-umbrella.h"
+
+  export *
+  module * { export * }
+}

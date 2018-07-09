@@ -1,0 +1,6 @@
+framework module Swift_SimpleNetworkLibrary {
+  umbrella header "Swift_SimpleNetworkLibrary-umbrella.h"
+
+  export *
+  module * { export * }
+}

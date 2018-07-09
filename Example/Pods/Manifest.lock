@@ -1,0 +1,16 @@
+PODS:
+  - Swift_SimpleNetworkLibrary (0.1.0)
+
+DEPENDENCIES:
+  - Swift_SimpleNetworkLibrary (from `../`)
+
+EXTERNAL SOURCES:
+  Swift_SimpleNetworkLibrary:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  Swift_SimpleNetworkLibrary: 6a576437c7c0f3559f9ba8815e2487afe26072bd
+
+PODFILE CHECKSUM: 04e89b9b8d88b6e493f063fb9dd62f4d948e87b7
+
+COCOAPODS: 1.5.3

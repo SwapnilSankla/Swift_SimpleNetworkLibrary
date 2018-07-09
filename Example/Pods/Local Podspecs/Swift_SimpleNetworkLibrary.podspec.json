@@ -1,0 +1,22 @@
+{
+  "name": "Swift_SimpleNetworkLibrary",
+  "version": "0.1.0",
+  "summary": "A short description of Swift_SimpleNetworkLibrary.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/SwapnilSankla/Swift_SimpleNetworkLibrary",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "SwapnilSankla": "sanklas@thoughtworks.com"
+  },
+  "source": {
+    "git": "https://github.com/SwapnilSankla/Swift_SimpleNetworkLibrary.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "Swift_SimpleNetworkLibrary/Classes/**/*"
+}

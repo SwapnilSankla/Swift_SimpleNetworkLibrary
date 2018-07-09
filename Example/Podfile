@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'Swift_SimpleNetworkLibrary_Example' do
+  pod 'Swift_SimpleNetworkLibrary', :path => '../'
+
+  target 'Swift_SimpleNetworkLibrary_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
