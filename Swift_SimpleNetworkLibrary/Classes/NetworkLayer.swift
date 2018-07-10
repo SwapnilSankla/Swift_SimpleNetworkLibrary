@@ -3,13 +3,13 @@ import Foundation
 typealias NetworkCompletionHandler = (Data?, URLResponse?, Error?) -> Void
 public typealias ErrorHandler = (String) -> Void
 
-public class NetworkLayer {
+open class NetworkLayer {
     static let genericError = "Something went wrong. Please try again later"
 
     public init() {
     }
 
-    public func get<T: Decodable>(urlString: String,
+    open func get<T: Decodable>(urlString: String,
                                   headers: [String: String] = [:],
                                   successHandler: @escaping (T) -> Void,
                                   errorHandler: @escaping ErrorHandler) {
@@ -42,7 +42,7 @@ public class NetworkLayer {
         URLSession.shared.dataTask(with: request, completionHandler: completionHandler).resume()
     }
 
-    public func post<T: Encodable>(urlString: String,
+    open func post<T: Encodable>(urlString: String,
                                    body: T,
                                    headers: [String: String] = [:],
                                    errorHandler: @escaping ErrorHandler) {

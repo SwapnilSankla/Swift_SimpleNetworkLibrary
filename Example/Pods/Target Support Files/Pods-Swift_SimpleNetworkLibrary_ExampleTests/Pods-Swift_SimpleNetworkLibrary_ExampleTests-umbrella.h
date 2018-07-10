@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double Pods_Swift_SimpleNetworkLibrary_TestsVersionNumber;
-FOUNDATION_EXPORT const unsigned char Pods_Swift_SimpleNetworkLibrary_TestsVersionString[];
+FOUNDATION_EXPORT double Pods_Swift_SimpleNetworkLibrary_ExampleTestsVersionNumber;
+FOUNDATION_EXPORT const unsigned char Pods_Swift_SimpleNetworkLibrary_ExampleTestsVersionString[];
 

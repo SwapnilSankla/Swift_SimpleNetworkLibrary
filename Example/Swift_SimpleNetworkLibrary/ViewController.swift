@@ -4,31 +4,19 @@ import Swift_SimpleNetworkLibrary
 class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        getExample()
-        postExample()
+        let presenter = Presenter(view: self)
+        presenter.getExample()
+        presenter.postExample()
+    }
+}
+
+extension ViewController: ViewProtocol {
+    func displayEmployees(employees: [Employee]) {
+
     }
 
-    private func getExample() {
-        let successHandler: ([Employee]) -> Void = { (employees) in
-            print(employees)
-        }
-        let errorHandler: (String) -> Void = { (error) in
-            print(error)
-        }
+    func displayError(error: String) {
 
-        NetworkLayer().get(urlString: "http://dummy.restapiexample.com/api/v1/employees",
-                           successHandler: successHandler,
-                           errorHandler: errorHandler)
-    }
-
-    private func postExample() {
-        let errorHandler: (String) -> Void = { (error) in
-            print(error)
-        }
-        let emp1 = Employee(name: "Test_123", salary: "12234", age: "22")
-        NetworkLayer().post(urlString: "http://dummy.restapiexample.com/api/v1/create",
-                            body: emp1,
-                            errorHandler: errorHandler)
     }
 }
 
