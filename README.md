@@ -57,6 +57,61 @@ NetworkLayer().post(urlString: "http://dummy.restapiexample.com/api/v1/create",
                     errorHandler: errorHandler)
 ```
 
+## Unit testing
+We all know that Swift recommends to not to use mocks and rather rely on the other types of test doubles. This package contains a dummy network layer for simplifying the unit testing of the caller methods.
+
+Let's assume you want to test getExample method from the code below.
+
+```swift
+class Presenter {
+    let networkLayer: NetworkLayer
+    var view: ViewProtocol?
+
+    init(view: ViewProtocol,
+         networkLayer: NetworkLayer = NetworkLayer()) {
+        self.view = view
+        self.networkLayer = networkLayer
+    }
+
+    func getExample() {
+        let successHandler: ([Employee]) -> Void = { (employees) in
+            print(employees)
+            self.view?.displayEmployees(employees: employees)
+        }
+        let errorHandler: (String) -> Void = { (error) in
+            print(error)
+            self.view?.displayError(error: error)
+        }
+
+        networkLayer.get(urlString: "http://dummy.restapiexample.com/api/v1/employees",
+                         successHandler: successHandler,
+                         errorHandler: errorHandler)
+    }
+```
+Below is how you write the test. We get the DummyNetworkLayer out of the box. 
+
+```swift
+class PresenterTests: XCTestCase {
+    let view = DummyViewController()
+    let networkLayer = DummyNetworkLayer()
+
+    func test_getExample_callsDisplayEmployees_onSuccess() {
+        networkLayer.successResponse = [Employee(name: "Swapnil",
+                                                 salary: "123456",
+                                                 age: "30")]
+        Presenter(view: view, networkLayer: networkLayer).getExample()
+        XCTAssertTrue(view.displayEmployeesCalled)
+    }
+
+class DummyViewController: ViewProtocol {
+    var displayEmployeesCalled = false
+
+    func displayEmployees(employees: [Employee]) {
+        displayEmployeesCalled = true
+    }
+```
+PresenterTests under Example project shows all variants of using DummyNetworkLayer.
+
 ## Author
 
 Swapnil Sankla, swapnil.sankla@gmail.com
