@@ -10,9 +10,9 @@ open class NetworkLayer {
     }
 
     open func get<T: Decodable>(urlString: String,
-                                  headers: [String: String] = [:],
-                                  successHandler: @escaping (T) -> Void,
-                                  errorHandler: @escaping ErrorHandler) {
+                                headers: [String: String] = [:],
+                                successHandler: @escaping (T) -> Void,
+                                errorHandler: @escaping ErrorHandler) {
 
         let completionHandler: NetworkCompletionHandler = { (data, urlResponse, error) in
             if let error = error {
@@ -37,15 +37,16 @@ open class NetworkLayer {
         guard let url = URL(string: urlString) else {
             return errorHandler("Unable to create URL from given string")
         }
+
         var request = URLRequest(url: url)
         request.allHTTPHeaderFields = headers
         URLSession.shared.dataTask(with: request, completionHandler: completionHandler).resume()
     }
 
     open func post<T: Encodable>(urlString: String,
-                                   body: T,
-                                   headers: [String: String] = [:],
-                                   errorHandler: @escaping ErrorHandler) {
+                                 body: T,
+                                 headers: [String: String] = [:],
+                                 errorHandler: @escaping ErrorHandler) {
 
         let completionHandler: NetworkCompletionHandler = { (data, urlResponse, error) in
             if let error = error {
@@ -65,9 +66,9 @@ open class NetworkLayer {
         }
         var request = URLRequest(url: url)
         request.timeoutInterval = 90
-        request.allHTTPHeaderFields = headers
         request.httpMethod = "POST"
-        request.allHTTPHeaderFields = ["Content-Type":"application/json"]
+        request.allHTTPHeaderFields = headers
+        request.allHTTPHeaderFields?["Content-Type"] = "application/json"
         guard let data = try? JSONEncoder().encode(body) else {
             return errorHandler("Cannot encode given object into Data")
         }
